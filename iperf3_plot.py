@@ -218,10 +218,10 @@ class iperf3_dataParser(object):
         value=[]
         duration = iperf.get('start').get('test_start').get('duration')
         for i in iperf.get('intervals'):
-            for ii in i.get('streams'):
-                if (round(float(ii.get('start')), 0)) <= duration:
-                    idx.append(round(float(ii.get('start')), 0))
-                    value.append(round(float(ii.get('bits_per_second')) / (1024*1024), 3))
+            total_bw_stream = i.get('sum')
+            if (round(float(total_bw_stream.get('start')), 0)) <= duration:
+                idx.append(round(float(total_bw_stream.get('start')), 0))
+                value.append(round(float(total_bw_stream.get('bits_per_second')) / (1024*1024), 3))
         return pd.Series(value, index=idx)
 
     def get_plotFiles(self,foldername, plotFiles, noPlotFiles):
