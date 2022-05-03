@@ -316,7 +316,7 @@ if __name__ == '__main__':
 
         #plot all lines, sort by mean value/column
         if len(bound) >=0:
-            dataset = dataset.reindex_axis(dataset.mean().sort_values().index, axis=1)
+            dataset = dataset.reindex(dataset.mean().sort_values().index, axis=1)
             # last_row_name = dataset.index[-1]
             # dataset = dataset.T.sort(columns=last_row_name, ascending=False).T
             # dataset.to_csv(output + "_sort_by_mean.csv")
