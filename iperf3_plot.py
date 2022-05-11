@@ -39,9 +39,9 @@ class iperf3_plotter(object):
         fig, ax = plt.subplots()
         # # the size of A4 paper
         fig.set_size_inches(12,14)
-
+##TODO find a way to order both the datasets of boxplot and lineplot , 
         # create our boxplot which is drawn on an Axes object
-        sns.boxplot(data=dataset,orient="h", palette="Set2")
+        sns.boxplot(data=dataset,orient="h", palette="Set2", order=["0m","5m","10m","15m"])
         filename = filename.replace(".png","_box.png")
         plt.title(title)
         plt.savefig(filename, bbox_inches="tight")
@@ -293,10 +293,10 @@ if __name__ == '__main__':
         #plot overall box
         dataset.to_csv(output+".csv")
         dataset.describe().to_csv(output + "_stats.csv")
-        desc="x_labels: Seconds\ny_lebel: Mbps\nclients: "+str(len(dataset.columns))
-        title= "iperf throughput Mbps per seconds"
+        desc="x_labels: Seconds\ny_label: Mbps\nclients: "+str(len(dataset.columns))
+        title= input('Input the title for your graph')
         # if len(bound) > 0:
-        plotter.plotBox(dataset,output, desc, title)
+        plotter.plotBox(dataset,output, desc, title,)
 
         #plot individual
         if upperLimit>=0 and lowerLimit >=0:
